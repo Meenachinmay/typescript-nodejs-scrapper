@@ -10,8 +10,18 @@ export default function Scrapping() {
     reset,
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
+
+    const response = await fetch("http://localhost:4000/api/v1/scrapping-site", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    });
+
+    const responseData = await response.json();
 
     //reset the form
     reset();
